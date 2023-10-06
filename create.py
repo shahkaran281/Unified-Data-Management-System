@@ -3,8 +3,6 @@ import re
 
 
 def create_table(table_name, attributes):
-    # Implement the logic to create the table here
-    # You should replace placeholders with actual values and create the table
 
     print(f"Creating table")
     print("TableName:", table_name)
