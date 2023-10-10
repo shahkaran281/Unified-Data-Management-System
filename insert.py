@@ -1,11 +1,21 @@
 import sys
 import re
-
+import uuid
+import os
+import csv
 
 def insert_table(tableName, values):
     print("Insert table called")
     print("Table Name:", tableName)
     print("Value List:", values)
+    path = f"data/{table_name}.csv"
+    values.insert(0 , uuid.uuid4())
+    if os.path.exists(path) == False:
+            raise FileExistsError("Table Does not Exist")
+    with open(path , 'a' , newline= '') as file:
+            csv_writer = csv.writer(file)
+            csv_writer.writerow(values)
+
 
 
 if __name__ == "__main__":
