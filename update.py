@@ -15,7 +15,8 @@ def load_row_by_value(csv_file, column_name, target_value):
             raise ValueError(f"Target value '{target_value}' not found in column '{column_name}'.")
     except Exception as e:
         return str(e)  # Return the error message if an exception occurs
-    
+
+
 
 def update_table(tableName, uuid_to_update, values):
     for i in range(len(values)):
@@ -28,25 +29,42 @@ def update_table(tableName, uuid_to_update, values):
     # Load the items to update
     result , idx = load_row_by_value(f"data/{tableName}.csv", 'uuid', uuid_to_update)
     print(result , idx)
-    idx+=1
-    bash_script = f"sed '{idx}d' data/{tableName}.csv | tee data/{tableName}.csv"
-    print(bash_script)
-    # Need to update the values
-    for val in values:
-        current_param_val = val.split(' ')
-        param = current_param_val[0]
-        new_value = current_param_val[1]
-        result[param] = new_value
-    subprocess.run(bash_script , shell=True , check=True)
-    
+    process = subprocess.Popen([f"scripts/update.sh" , str(idx+2) , f"data/{tableName}.csv" ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
 
+    # Print the verbose output
+    print("Standard Output:")
+    print(stdout.decode())  # Decode bytes to string for Python 3.x
+
+    print("Standard Error:")
+    print(stderr.decode())  # Decode bytes to string for Python 3.x
+    
+    for value in values:
+        attribute = value.split(' ')[0]
+        new_val = value.split(' ')[1]
+        # print(attribute , new_val)
+        result[attribute] = new_val
     print(result)
 
-    # Check if the result is a dictionary (indicating a valid row) or an error message
-    # if isinstance(result, dict):
-    #     print("Row found:", result)
-    # else:
-    #     print("Error:", result)
+    with open(f"data/{tableName}.csv", 'a', newline='\n') as csvfile:
+        fieldnames = result.keys()
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        # writer.writeheader()
+        writer.writerow(result)
+
+    # Check if the CSV file is empty and write header if needed
+    # if csvfile.tell() == 0:
+    #     writer.writeheader()
+
+    # Write the dictionary to the CSV file
+    
+
+# print(f"Data has been written to {csv_file_path}")
+
+
+
+
+
 
 
 if __name__ == "__main__":
