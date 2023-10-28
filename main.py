@@ -17,5 +17,8 @@ if __name__ == "__main__":
         elif user_input.lower().startswith('delete'):
             command = user_input[len('delete'):].strip()
             subprocess.run(['python3', 'delete.py', command])
+        elif user_input.lower().startswith('aggregate'):
+            command = user_input[len('aggregate'):].strip()
+            subprocess.run(['python3', 'aggregate.py', command])
         elif user_input.lower() == 'exit':
             break
