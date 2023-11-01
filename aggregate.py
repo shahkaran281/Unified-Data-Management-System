@@ -6,33 +6,51 @@ import csv
 
 
 def aggregate_table(tableName , count_attribute , attribute_list):
-    # print(tableName , count_attribute , attribute_list)    
-    all_distinct = set()
+    distinct_counts = {} 
     try:
         with open(f"data/{tableName}.csv", 'r', newline='') as file:
             reader = csv.DictReader(file)
-            for row in reader:
-                all_distinct.add(row[count_attribute])
-        print(len(all_distinct))
-    except Exception as e:
-        return str(e)  # Return the error message if an exception occurs
+            file_headers = reader.fieldnames
+
+            if count_attribute not in file_headers:
+                print(f"Error: Count attribute '{count_attribute}' not found in the file '{tableName}.csv'")
+                return
+            
+            for attribute in attribute_list:
+                if(attribute not in file_headers):
+                    print(f"Error: Attribute '{attribute}' not found in the file '{tableName}.csv'")
+                    return
+
+            for row in reader:       
+                count_value = row[count_attribute]                     
+                if count_value in distinct_counts:
+                    distinct_counts[count_value] += 1
+                else:
+                    distinct_counts[count_value] = 1
+            
+            for value , count in distinct_counts.items():
+                print(f" {value},  {count}")
+
+    except FileNotFoundError:
+        print( f"Error: File '{tableName}.csv' not found in the 'data' directory.")
 
 
 
 
 if __name__ == "__main__":
-    # print("Aggregate Called")
     command = sys.argv[1]
-    # print("Command:", command)
-    pattern = r'COUNT\(([^)]+)\) , (.+?) FROM (\w+)'
+    pattern = r'COUNT\(([^)]+)\)\s+,\s+(.+?)\s+FROM\s+(\w+)(\s+GROUP BY\s+(\w+))?'
     match = re.search(pattern, command, re.IGNORECASE)
     if match:
         count_attribute = match.group(1)
-        attribute_list = match.group(2).split(', ')
+        attribute_list = match.group(2).split(',')
+        stripped_attribute_list = [attribute.strip() for attribute in attribute_list]
         table = match.group(3)
+        group_by = match.group(4)
+        if(group_by):
+            print(group_by)
         print(count_attribute , attribute_list , table)
-        # print(value_attributes)
-        aggregate_table(table, count_attribute, attribute_list)
+        aggregate_table(table, count_attribute, stripped_attribute_list)
 
     else:
         print("Input string does not match the expected format. USE : UPDATE INTO <TABLE_NAME> <UUID> (<VALUE_ATTRIBUTES_SEPARATED_BY_COMMA>)")
