@@ -33,7 +33,8 @@ def join_and_print_selected_columns(file1, file2, key1='uuid', key2='fk', column
 
 if __name__ == '__main__':
     # Your input string
-    command = "['Youtuber'], ['video_views_rank','country_rank'] FROM YoutubeChannels.uuid = YoutubeViews.fk"
+    command = sys.argv[1]
+    # "['Youtuber'], ['video_views_rank','country_rank'] FROM YoutubeChannels.uuid = YoutubeViews.fk"
 
     # Define a regex pattern with the re.IGNORECASE flag
     pattern = r'\[(.*?)\], \[(.*?)\] FROM (.+?)\.(.+) = (.+?)\.(.+)'
