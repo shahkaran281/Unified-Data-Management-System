@@ -11,3 +11,10 @@ AGGREGATE COUNT(channel_type) , Title, rank  ,  category FROM YouTubeChannel GRO
 
 AGGREGATE COUNT(channel_type) , Title, rank  ,  category FROM YouTubeChannel
 
+## Example for Group By , Condition and Order By
+
+SELECT Title, rank , Country FROM YouTubeChannel WHERE rank == '9'
+
+SELECT Title, rank , Country FROM YouTubeChannel ORDER BY Country
+
+SELECT Title, rank , Country FROM YouTubeChannel WHERE rank > '1' GROUP BY Country ORDER BY Country
