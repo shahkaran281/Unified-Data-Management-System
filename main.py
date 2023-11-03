@@ -23,5 +23,8 @@ if __name__ == "__main__":
         elif user_input.lower().startswith('proj'):
             command = user_input[len('proj'):].strip()
             subprocess.run(['python3', 'proj.py', command])
+        elif user_input.lower().startswith('filter'):
+            command = user_input[len('filter'):].strip()
+            subprocess.run(['python3', 'filter.py', command])
         elif user_input.lower() == 'exit':
             break
