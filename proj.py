@@ -39,11 +39,11 @@ def print_selected_columns(table_name, columns_to_print):
 if __name__ == "__main__":
     # Test the function with your 'command' query
     command = sys.argv[1]
-    print("Filter Called:",command)
+    # print("Proj Called:",command)
     pattern1 = r'^all\s+FROM\s+(\w+)$'
-    # Example : Filter all FROM YoutubeChannels
+    # Example : Proj all FROM YoutubeChannels
     pattern2 = r'^\[(.*?)\]\s+FROM\s+(\w+)$'
-    # Example : Filter [Youtuber,rank] FROM YoutubeChannels
+    # Example : Proj [Youtuber,rank] FROM YoutubeChannels
 
     # Try to match the query with both patterns
     match1 = re.match(pattern1, command)
