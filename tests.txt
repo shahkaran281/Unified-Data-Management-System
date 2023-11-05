@@ -1,0 +1,35 @@
+CREATE TABLE newTable (id,name)
+CREATE TABLE newTable ( id,  name)
+CREATE TABLE newTable ( id,  name, val)
+CREATE TABLE      newTable ( id,  name, val)
+
+INSERT INTO newTable (100, John Doe, 1000)
+INSERT INTO newTable (101, Jake Doe, 2000)
+INSERT INTO newTable (201, Sal Doe, 2000)
+INSERT INTO newTable (301,    Sal Doe   , 3000)
+
+** NOT WORKING AS EXPECTED, DELETING THE ROW, BUT NOT INSERTING NEW ONE
+UPDATE INTO newTable 14616f95-4390-44e7-9cbd-01e7ad9ccee3 (401, Johnson, 1212)
+
+DELETE FROM newTable efca5fe7-a9b4-4bc7-a1d9-46af45ac3f5e
+DELETE FROM newTable       efca5fe7-a9b4-4bc7-a1d9-46af45ac3f5e
+DELETE FROM newTable       efca5fe7-a9b4-4bc7-a1d9-46af45ac3f52 (From value not present in table)
+
+Filter [  Youtuber,subscribers] from YoutubeChannels where rank >= 5
+Filter [  Youtuber,   subscribers] from YoutubeChannels where rank >= 5
+Filter [  Youtuber,   subscribers]     from YoutubeChannels    where rank >= 5
+
+Proj [uuid, rank, Youtuber ] FROM YoutubeChannels
+Proj [uuid, ranks, Youtuber ] FROM YoutubeChannels
+Proj [uuid, rank, Youtuber ] FROM YoutubeChannel
+ 
+Join ['Youtuber'], ['video_views_rank','country_rank'] FROM YoutubeChannels.uuid = YoutubeViews.fk WHERE country_rank >= 5 ORDER BY Youtuber
+Join ['Youtubers'], ['video_views_rank','country_rank'] FROM YoutubeChannels.uuid = YoutubeViews.fk WHERE country_rank >= 5 ORDER BY Youtuber
+Join ['Youtuber'], ['video_views_ranks','country_rank'] FROM YoutubeChannels.uuid = YoutubeViews.fk WHERE country_rank >= 5 ORDER BY Youtuber
+Join ['Youtuber'], ['video_views_ranks','country_rank'] FROM YoutubeChannel.uuid = YoutubeViews.fk WHERE country_rank >= 5 ORDER BY Youtuber
+Join ['Youtuber'], ['video_views_rank','country_rank'] FROM YoutubeChannels.uuids = YoutubeViews.fk WHERE country_rank >= 5 ORDER BY Youtuber
+Join ['Youtuber'], ['video_views_rank','country_rank'] FROM YoutubeChannels.uuid = YoutubeView.fk WHERE country_rank >= 5 ORDER BY Youtuber
+Join ['Youtuber'], ['video_views_rank','country_rank'] FROM YoutubeChannels.uuid = YoutubeViews.fkey WHERE country_rank >= 5 ORDER BY Youtuber
+Join ['Youtuber'], ['video_views_rank','country_rank'] FROM YoutubeChannels.uuid = YoutubeViews.fk WHERE country_ranks >= 5 ORDER BY Youtuber
+Join ['Youtuber'], ['video_views_rank','country_rank'] FROM YoutubeChannels.uuid = YoutubeViews.fk WHERE country_rank >= 10 ORDER BY Youtuber 
+** Last one is showing incorrect output
