@@ -1,20 +1,20 @@
-# DSCI551-Project
-Project for DSCI 551 - Foundation of Data Managment. The objective is to create SQL and NoSQL for scratch.
+## NO SQL Commands 
+
+## CREATE TABLE COMMAND
+
+CREATE TABLE ZZ
+
+## INSERT INTO TABLE COMMAND
+
+INSERT INTO ZZ ({"id":"1"})
+INSERT INTO ZZ ({"id":"1" , "value" : "Test"})
 
 
+## UPDATE ZZ
 
-## Aggregate Example
+UPDATE INTO ZZ 9749f911-75bb-48a5-9475-61b107bcff26 ({"id" : "99" , "value": "updated"}))
 
-AGGREGATE COUNT(channel_type) , Title, rank  ,  category FROM YouTubeChannel GROUP BY Title
 
-## Here Group By is an optional attribute
+## DELETE COMMAND
 
-AGGREGATE COUNT(channel_type) , Title, rank  ,  category FROM YouTubeChannel
-
-## Example for Group By , Condition and Order By
-
-SELECT Title, rank , Country FROM YouTubeChannel WHERE rank == '9'
-
-SELECT Title, rank , Country FROM YouTubeChannel ORDER BY Country
-
-SELECT Title, rank , Country FROM YouTubeChannel WHERE rank > '1' GROUP BY Country ORDER BY Country
+DELETE FROM ZZ 9749f911-75bb-48a5-9475-61b107bcff26
