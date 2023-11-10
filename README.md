@@ -1,2 +1,20 @@
-# DSCI551-Project
-Project for DSCI 551 - Foundation of Data Managment. The objective is to create SQL and NoSQL for scratch.
+## NO SQL Commands 
+
+## CREATE TABLE COMMAND
+
+CREATE TABLE ZZ
+
+## INSERT INTO TABLE COMMAND
+
+INSERT INTO ZZ ({"id":"1"})
+INSERT INTO ZZ ({"id":"1" , "value" : "Test"})
+
+
+## UPDATE ZZ
+
+UPDATE INTO ZZ 9749f911-75bb-48a5-9475-61b107bcff26 ({"id" : "99" , "value": "updated"}))
+
+
+## DELETE COMMAND
+
+DELETE FROM ZZ 9749f911-75bb-48a5-9475-61b107bcff26
