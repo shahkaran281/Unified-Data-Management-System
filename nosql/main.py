@@ -4,7 +4,7 @@ import subprocess
 
 if __name__ == "__main__":
     while True:
-        user_input = input("Write Command: ")
+        user_input = input("Write Command: ").strip()
         if user_input.lower().startswith('create'):
             command = user_input[len('create'):].strip()
             subprocess.run(['python3', 'create.py', command])
@@ -23,5 +23,8 @@ if __name__ == "__main__":
         elif user_input.lower().startswith('select'):
             command = user_input[len('select'):].strip()
             subprocess.run(['python3', 'Select.py', command])
+        elif user_input.lower().startswith('filter'):
+            command = user_input[len('filter'):].strip()
+            subprocess.run(['python3', 'filter.py', command])
         elif user_input.lower() == 'exit':
             break
