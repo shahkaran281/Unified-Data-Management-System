@@ -26,3 +26,11 @@ filter all from youtube_data where rank >= 5
 filter [channel_name,subscribers] from youtube_data
 
 filter [channel_name,subscribers] from youtube_data where rank >= 5
+
+## JOIN COMMAND
+
+Join ['name', 'age'], ['job', 'city'] FROM Table1.uuid = Table2.fk
+
+Join ['name', 'age'], ['job', 'city'] FROM Table1.uuid = Table2.fk Where age > 25
+
+Join ['name', 'age'], ['job', 'city'] FROM Table1.uuid = Table2.fk Where age > 25 order by city
