@@ -26,5 +26,8 @@ if __name__ == "__main__":
         elif user_input.lower().startswith('filter'):
             command = user_input[len('filter'):].strip()
             subprocess.run(['python3', 'filter.py', command])
+        elif user_input.lower().startswith('join'):
+            command = user_input[len('join'):].strip()
+            subprocess.run(['python3', 'join.py', command])
         elif user_input.lower() == 'exit':
             break
