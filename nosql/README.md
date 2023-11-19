@@ -22,7 +22,7 @@ DELETE FROM ZZ 9749f911-75bb-48a5-9475-61b107bcff26
 ## SELECT AND FILTER OPERATIONS
 
 SELECT Activity_Period , GEO_Summary , GEO_Region FROM airline WHERE GEO_Region == "Caribbean" ORDER BY Activity_Period
-
+SELECT Aircraft_Model , Aircraft_Body_Type FROM details WHERE Aircraft_Model == 'B78X'
 
 AGGREGATE COUNT(Operating_Airline) , GEO_Region FROM airline GROUP BY GEO_Region ORDER BY GEO_Region
 
