@@ -48,7 +48,7 @@ def select_table(tableName  , attribute_list , condition = None , group_by = Non
                 chunk = [r for r in chunk if eval(f"r['{condition.split()[0]}'] {condition.split()[1]} {condition.split()[2]}")]
                 selected_attributes.extend(chunk)
             elif len(chunk) > 0:
-                selected_data.extend(chunk)
+                selected_attributes.extend(chunk)
                  
 
 
