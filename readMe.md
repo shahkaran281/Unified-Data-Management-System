@@ -97,7 +97,7 @@ Now, it will launch a command line, where user can enter the command. To close i
    This command is intended to remove the record associated with the UUID 'cd01bde4-30b3-4a43-960c-184642f39399​' from the 'zz' JSON-based table.
 
 5. AGGREGATE :
-   Command: AGGREGATE COUNT(Operating_Airline) , GEO_Region FROM airline GROUP BY GEO_Region ORDER BY GEO_Region​
+   Command: AGGREGATE COUNT(Operating_Airline) , GEO_Region FROM airline GROUP BY GEO_Region ORDER BY GEO_Region
 
    Action: Manages JSON data aggregation, counting occurrences of 'attribute_name' in the 'table_name' JSON file. It groups data by 'group_by_attribute' and optionally orders by 'order_by_attribute'.​
    Functionality: Handles JSON file manipulations, parses JSON data, conducts aggregation and grouping, and offers optional ordering based on specified attributes.
