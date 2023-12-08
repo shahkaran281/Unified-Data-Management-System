@@ -5,35 +5,37 @@ import os
 import csv
 
 
-
-def aggregate_table_2(tableName , count_attribute , attribute_list):
-    distinct_counts = {} 
+def aggregate_table_2(tableName, count_attribute, attribute_list):
+    distinct_counts = {}
     try:
         with open(f"data/{tableName}.csv", 'r', newline='') as file:
             reader = csv.DictReader(file)
             file_headers = reader.fieldnames
 
             if count_attribute not in file_headers:
-                print(f"Error: Count attribute '{count_attribute}' not found in the file '{tableName}.csv'")
+                print(
+                    f"Error: Count attribute '{count_attribute}' not found in the file '{tableName}.csv'")
                 return
-            
+
             for attribute in attribute_list:
-                if(attribute not in file_headers):
-                    print(f"Error: Attribute '{attribute}' not found in the file '{tableName}.csv'")
+                if (attribute not in file_headers):
+                    print(
+                        f"Error: Attribute '{attribute}' not found in the file '{tableName}.csv'")
                     return
 
-            for row in reader:       
-                count_value = row[count_attribute]                     
+            for row in reader:
+                count_value = row[count_attribute]
                 if count_value in distinct_counts:
                     distinct_counts[count_value] += 1
                 else:
                     distinct_counts[count_value] = 1
-            
-            for value , count in distinct_counts.items():
+
+            for value, count in distinct_counts.items():
                 print(f" {value},  {count}")
 
     except FileNotFoundError:
-        print( f"Error: File '{tableName}.csv' not found in the 'data' directory.")
+        print(
+            f"Error: File '{tableName}.csv' not found in the 'data' directory.")
 
 
 def aggregate_table(tableName, count_attribute, attribute_list, chunk_size=3):
@@ -46,12 +48,14 @@ def aggregate_table(tableName, count_attribute, attribute_list, chunk_size=3):
             file_headers = reader.fieldnames
 
             if count_attribute not in file_headers:
-                print(f"Error: Count attribute '{count_attribute}' not found in the file '{tableName}.csv'")
+                print(
+                    f"Error: Count attribute '{count_attribute}' not found in the file '{tableName}.csv'")
                 return
 
             for attribute in attribute_list:
                 if attribute not in file_headers:
-                    print(f"Error: Attribute '{attribute}' not found in the file '{tableName}.csv'")
+                    print(
+                        f"Error: Attribute '{attribute}' not found in the file '{tableName}.csv'")
                     return
 
             for row in reader:
@@ -69,19 +73,20 @@ def aggregate_table(tableName, count_attribute, attribute_list, chunk_size=3):
 
             if chunk:  # Process the remaining rows if any
                 process_chunk(chunk, attribute_list)
-        for value , count in distinct_counts.items():
+        for value, count in distinct_counts.items():
             print(f" {value},  {count}")
         # print_pretty_dict(distinct_counts)
 
     except FileNotFoundError:
-        print(f"Error: File '{tableName}.csv' not found in the 'data' directory.")
+        print(
+            f"Error: File '{tableName}.csv' not found in the 'data' directory.")
+
 
 def process_chunk(chunk, attribute_list):
     pass
     # Do something with the chunk (e.g., additional processing or printing)
     # for row in chunk:
     #     print(f"Processing chunk: {row}")
-
 
 
 if __name__ == "__main__":
@@ -91,12 +96,13 @@ if __name__ == "__main__":
     if match:
         count_attribute = match.group(1)
         attribute_list = match.group(2).split(',')
-        stripped_attribute_list = [attribute.strip() for attribute in attribute_list]
+        stripped_attribute_list = [attribute.strip()
+                                   for attribute in attribute_list]
         table = match.group(3)
         group_by = match.group(4)
-        if(group_by):
-            print(group_by)
-        print(count_attribute , attribute_list , table)
+        # if(group_by):
+        #     print(group_by)
+        # print(count_attribute, attribute_list, table)
         aggregate_table(table, count_attribute, stripped_attribute_list)
 
     else:

@@ -3,6 +3,80 @@ import re
 import sys
 
 
+def merge_sort(arr, key):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+        merge_sort(left_half, key)
+        merge_sort(right_half, key)
+        i = j = k = 0
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i][key] < right_half[j][key]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+
+
+def merge_sort_json(data, key):
+    if len(data) <= 1:
+        return data
+    # Splitting the JSON data into two halves
+    mid = len(data) // 2
+    left = data[:mid]
+    right = data[mid:]
+    # Recursive call to sort each half
+    left = merge_sort_json(left, key)
+    right = merge_sort_json(right, key)
+    return merge_json(left, right, key)
+
+
+def merge_json(left, right, key):
+    result = []
+    left_idx, right_idx = 0, 0
+    while left_idx < len(left) and right_idx < len(right):
+        if left[left_idx][key] < right[right_idx][key]:
+            result.append(left[left_idx])
+            left_idx += 1
+        else:
+            result.append(right[right_idx])
+            right_idx += 1
+    # Adding remaining elements
+    result.extend(left[left_idx:])
+    result.extend(right[right_idx:])
+    return result
+
+
+def merge_sort_custom_page(data, key, page_size):
+    # Splitting the data into pages of specified size
+    pages = [data[i:i + page_size] for i in range(0, len(data), page_size)]
+    # Sort each page using merge sort
+    for i, page in enumerate(pages):
+        pages[i] = merge_sort_json(page, key)
+    # Merge sorted pages
+    while len(pages) > 1:
+        merged_pages = []
+        for i in range(0, len(pages), 2):
+            if i + 1 < len(pages):
+                merged = merge_json(pages[i], pages[i + 1], key)
+                merged_pages.append(merged)
+            else:
+                merged_pages.append(pages[i])
+        pages = merged_pages
+    return pages[0] if pages else []
+
+
 def join_and_print_selected_columns(file1, file2, key1='uuid', key2='fk', columns1=[], columns2=[], condition=None, order_by=None, chunk_size=100):
     # Read JSON files
     try:
