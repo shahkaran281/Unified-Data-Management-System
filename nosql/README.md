@@ -29,3 +29,7 @@ AGGREGATE COUNT(Operating_Airline) , GEO_Region FROM airline GROUP BY GEO_Region
 Filter all from airline where Operating_Airline_IATA_Code = 'GB'
 Filter all from airline
 Filter [Activity_Period, Operating_Airline, GEO_Region] from airline where GEO_Region = US
+
+## JOIN COMMAND
+
+SELECT Activity_Period , GEO_Summary , GEO_Region FROM airline WHERE GEO_Region == "Caribbean" ORDER BY Activity_Period
