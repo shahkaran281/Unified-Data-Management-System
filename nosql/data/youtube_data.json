@@ -1,0 +1,25 @@
+[
+    {
+        "channel_id": "ABC123",
+        "channel_name": "Channel A",
+        "rank": 7
+    },
+    {
+        "channel_id": "DEF456",
+        "channel_name": "Channel B",
+        "subscribers": "5K",  
+        "rank": 3
+    },
+    {
+        "channel_id": "GHI789",
+        "channel_name": "Channel C",
+        "subscribers": 20000,
+        "rank": "9"  
+    },
+    {
+        "channel_id": "JKL012",
+        "channel_name": "Channel D",
+        "subscribers": "15K",  
+        "rank": "10"  
+    }
+]

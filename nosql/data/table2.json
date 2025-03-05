@@ -1,0 +1,5 @@
+[
+    {"fk": "1", "job": "Engineer", "city": "New York"},
+    {"fk": "2", "job": "Designer", "city": "San Francisco"},
+    {"fk": "3", "job": "Doctor", "city": "Los Angeles"}
+]

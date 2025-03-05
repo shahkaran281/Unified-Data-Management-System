@@ -97,6 +97,23 @@ def join_and_print_selected_columns(file1, file2, key1='uuid', key2='fk', column
     def process_chunk(chunk1, chunk2):
         selected_data = []
         for item1 in chunk1:
+<<<<<<< HEAD
+            for item2 in chunk2:
+                if item1[key1] == item2[key2]:
+                    combined_data = {**item1, **item2}
+                    selected_data.append(combined_data)
+
+        if condition:
+            # Implement condition filtering
+            paramaters = condition.split(' ')
+            parameter_list = [param.strip() for param in paramaters]
+            if parameter_list[0] not in selected_data[0]:
+                print(
+                    f"Error: Attribute '{parameter_list[0]}' not found. For filtering, try with correct filter")
+                return []
+            selected_data = [row for row in selected_data if eval(
+                f"str(row['{parameter_list[0]}']) {parameter_list[1]} str(parameter_list[2])")]
+=======
             for key1, value1 in item1.items():
                 for item2 in chunk2:
                     for key2, value2 in item2.items():
@@ -116,6 +133,7 @@ def join_and_print_selected_columns(file1, file2, key1='uuid', key2='fk', column
             #     f"str(row['{parameter_list[0]}']) {parameter_list[1]} str(parameter_list[2])")]
             selected_data = [r for r in selected_data if r.get(condition.split()[0]) is not None and eval(
                 f"r['{condition.split()[0]}'] {condition.split()[1]} {condition.split()[2]}")]
+>>>>>>> main
 
         if order_by:
             if order_by not in selected_data[0]:
@@ -125,8 +143,11 @@ def join_and_print_selected_columns(file1, file2, key1='uuid', key2='fk', column
 
         return selected_data
 
+<<<<<<< HEAD
+=======
     columns = columns1 + columns2
 
+>>>>>>> main
     # Chunking the data
     for i in range(0, len(data1), chunk_size):
         for j in range(0, len(data2), chunk_size):
@@ -134,6 +155,17 @@ def join_and_print_selected_columns(file1, file2, key1='uuid', key2='fk', column
             chunk2 = data2[j:j + chunk_size]
 
             selected_data = process_chunk(chunk1, chunk2)
+<<<<<<< HEAD
+
+            # Print the headers and values for each chunk
+            if selected_data:
+                headers = list(selected_data[0].keys())
+                print("\t".join(headers))
+
+                for item in selected_data:
+                    values = list(item.values())
+                    print("\t".join(map(str, values)))
+=======
             # Print the headers and values for each chunk
             if selected_data:
                 for item in selected_data:
@@ -142,6 +174,7 @@ def join_and_print_selected_columns(file1, file2, key1='uuid', key2='fk', column
     # values = list(item.values())
     # print("\t".join(map(str, values)))
     # print()
+>>>>>>> main
 
 
 if __name__ == '__main__':
@@ -153,7 +186,10 @@ if __name__ == '__main__':
 
     if match:
         columns1_str = match.group(1).strip()
+<<<<<<< HEAD
+=======
 
+>>>>>>> main
         columns2_str = match.group(2).strip()
         table1 = match.group(3)
         col1 = match.group(4)
@@ -161,8 +197,14 @@ if __name__ == '__main__':
         col2 = match.group(6)
         where = match.group(7)
         order = match.group(8)
+<<<<<<< HEAD
+
+        columns1 = [col.strip('\'').strip() for col in columns1_str.split(',')]
+        columns2 = [col.strip('\'').strip() for col in columns2_str.split(',')]
+=======
         columns1 = list(re.findall(r"‘(.*?)’", columns1_str))
         columns2 = list(re.findall(r"‘(.*?)’", columns2_str))
+>>>>>>> main
 
         join_and_print_selected_columns(
             table1, table2, col1, col2, columns1, columns2, condition=where, order_by=order)
