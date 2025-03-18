@@ -1,36 +1,64 @@
-## NO SQL Commands
+# DSCI 551 - Hybrid Database System
 
-## CREATE TABLE COMMAND
+## Project Overview
+This project involves designing and implementing a hybrid database system that integrates both SQL and NoSQL data models. The system will handle YouTube analytics data using a relational database and Air Traffic Landing statistics at San Francisco International Airport (SFO) using a NoSQL database.
 
-CREATE TABLE ZZ
+## System Design
+### 1. Relational Model (SQL)
+**Dataset:** [YouTube Global Statistics 2023](https://www.kaggle.com/datasets/nelgiriyewithana/global-youtube-statistics-2023)
 
-## INSERT INTO TABLE COMMAND
+- **Entities:**
+  - Creator
+  - Video Statistics
+  - Country Details
+  - Subscribers
+  - Monetary Statistics
+- **Implementation Details:**
+  - Data is extracted, filtered, and normalized into relational tables.
+  - A Python-based custom key-value store enables efficient joins and projections.
+  - UUIDs ensure uniqueness and prevent hash conflicts.
 
-INSERT INTO ZZ ({"id":"1"})
-INSERT INTO ZZ ({"id":"1" , "value" : "Test"})
+### 2. Non-Relational Model (NoSQL)
+**Dataset:** [SFO Air Traffic Landing Statistics](https://www.kaggle.com/datasets/lostinworlds/sf-air-traffic-landing-statistics)
 
-## UPDATE ZZ
+- **Collections:**
+  - Airlines
+  - AirportRegions
+  - AircraftDetails
+- **Implementation Details:**
+  - Data is stored in JSON format, simulating NoSQL collections.
+  - Schema is adjustable on the fly for flexibility.
 
-UPDATE INTO ZZ 9749f911-75bb-48a5-9475-61b107bcff26 ({"id" : "99" , "value": "updated"})
+## Team Members
+### **Karan Manishkumar Shah**
+- **Role:** NoSQL Database Specialist
+- **Skills:** NoSQL systems, data modeling, data integration
+- **Responsibilities:**
+  - Implement NoSQL database structure
+  - Define schema and queries
+  - Ensure data consistency and scalability
 
-## DELETE COMMAND
+### **Aniket Kumar**
+- **Role:** SQL Database Specialist
+- **Skills:** SQL, relational schema design, query optimization
+- **Responsibilities:**
+  - Implement relational database schema
+  - Optimize SQL queries
+  - Develop stored procedures
 
-DELETE FROM ZZ 9749f911-75bb-48a5-9475-61b107bcff26
+## Getting Started
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo-name.git
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the database setup:
+   ```bash
+   python setup.py
+   ```
 
-## FILTER COMMAND
-
-filter all from youtube_data
-
-filter all from youtube_data where rank >= 5
-
-filter [channel_name,subscribers] from youtube_data
-
-filter [channel_name,subscribers] from youtube_data where rank >= 5
-
-## JOIN COMMAND
-
-Join ['name', 'age'], ['job', 'city'] FROM Table1.uuid = Table2.fk
-
-Join ['name', 'age'], ['job', 'city'] FROM Table1.uuid = Table2.fk Where age > 25
-
-Join ['name', 'age'], ['job', 'city'] FROM Table1.uuid = Table2.fk Where age > 25 order by city
+## License
+This project is open-source and available under the [MIT License](LICENSE).
