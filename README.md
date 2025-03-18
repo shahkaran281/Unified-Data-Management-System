@@ -1,5 +1,8 @@
 # DSCI 551 - Project Structure
 
+## Summary
+This project provides a unified query interface for both **SQL and NoSQL** databases, enabling seamless interactions through a structured command-line interface. It efficiently processes **CSV-based relational data** and **JSON-based document data** while supporting **complex queries, joins, and aggregations**.
+
 ## Folder Organization
 The project is divided into two main components:
 - **`mysql/`** - Contains all SQL-related functionality.
@@ -60,9 +63,6 @@ JOIN ['Activity_Period', 'GEO_Region'], ['Landing_Count'] FROM airline.uuid = de
 SELECT Activity_Period, GEO_Summary, GEO_Region FROM airline WHERE GEO_Region == 'Caribbean' ORDER BY Activity_Period;
 ```
 - Includes filtering, selections, joins, and aggregations.
-
-## Summary
-This project provides a unified query interface for both **SQL and NoSQL** databases, enabling seamless interactions through a structured command-line interface. It efficiently processes **CSV-based relational data** and **JSON-based document data** while supporting **complex queries, joins, and aggregations**.
 
 ## License
 This project is open-source and available under the [MIT License](LICENSE).
