@@ -46,19 +46,6 @@ This project involves designing and implementing a hybrid database system that i
   - Optimize SQL queries
   - Develop stored procedures
 
-## Getting Started
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo-name.git
-   ```
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Run the database setup:
-   ```bash
-   python setup.py
-   ```
 
 ## License
 This project is open-source and available under the [MIT License](LICENSE).
