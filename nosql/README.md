@@ -1,62 +1,56 @@
-# DSCI 551 - MySQL README
+# DSCI 551 - NoSQL README
 
-## SQL Query Language Overview
-This section details the SQL commands used in the hybrid database system, designed to efficiently manage structured YouTube analytics data.
+## NoSQL Query Language Overview
+This section details the NoSQL commands used in the hybrid database system, designed to efficiently manage flexible air traffic landing data.
 
 ### **Table Creation**
-```sql
-CREATE TABLE newTable (id INT, name VARCHAR(255), val INT);
+```nosql
+CREATE TABLE ZZ;
 ```
 
 ### **Data Insertion**
-```sql
-INSERT INTO newTable (id, name, val) VALUES (100, 'John Doe', 1000);
-INSERT INTO newTable (id, name, val) VALUES (101, 'Jake Doe', 2000);
-INSERT INTO newTable (id, name, val) VALUES (201, 'Sal Doe', 2000);
+```nosql
+INSERT INTO ZZ ( {"id":"1"} );
+INSERT INTO ZZ ( {"id":"1", "value":"Test"} );
 ```
 
 ### **Updating Records**
-```sql
-UPDATE newTable SET id = 999, val = 420 WHERE id = 9431fa9d-9cbf-4284-9496-e0e99657e32f;
+```nosql
+UPDATE INTO ZZ 9749f911-75bb-48a5-9475-61b107bcff26 ( {"id":"99", "value":"updated"} );
 ```
 
 ### **Deleting Records**
-```sql
-DELETE FROM newTable WHERE id = 'efca5fe7-a9b4-4bc7-a1d9-46af45ac3f5e';
+```nosql
+DELETE FROM ZZ 9749f911-75bb-48a5-9475-61b107bcff26;
 ```
 
 ### **Filtering Data**
-```sql
-SELECT Youtuber, subscribers FROM YoutubeChannel WHERE rank >= 5;
-```
-
-### **Projection Queries**
-```sql
-SELECT uuid, rank, Youtuber FROM YoutubeChannels;
+```nosql
+filter all from youtube_data;
+filter all from youtube_data where rank >= 5;
+filter [channel_name, subscribers] from youtube_data;
+filter [channel_name, subscribers] from youtube_data where rank >= 5;
 ```
 
 ### **Join Queries**
-```sql
-SELECT Youtuber, video_views_rank, country_rank
-FROM YoutubeChannels
-JOIN YoutubeViews ON YoutubeChannels.uuid = YoutubeViews.fk
-WHERE country_rank >= 5
-ORDER BY Youtuber;
+```nosql
+Join ['name', 'age'], ['job', 'city'] FROM Table1.uuid = Table2.fk;
+Join ['name', 'age'], ['job', 'city'] FROM Table1.uuid = Table2.fk WHERE age > 25;
+Join ['name', 'age'], ['job', 'city'] FROM Table1.uuid = Table2.fk WHERE age > 25 ORDER BY city;
 ```
 
 ### **Aggregation Queries**
-```sql
-SELECT COUNT(channel_type), Title, rank, category 
-FROM YoutubeChannels 
-GROUP BY Title;
+```nosql
+AGGREGATE COUNT(channel_type), Title, rank, category FROM YoutubeChannels GROUP BY Title;
 ```
 
 ### **Grouping, Conditions & Ordering**
-```sql
+```nosql
 SELECT Title, rank, Country FROM YoutubeChannels WHERE rank = 9;
 SELECT Title, rank, Country FROM YoutubeChannels ORDER BY Country;
 SELECT Title, rank, Country FROM YoutubeChannels WHERE rank > 1 GROUP BY Country ORDER BY Country;
 ```
+
 
 ## License
 This project is open-source and available under the [MIT License](LICENSE).
