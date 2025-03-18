@@ -1,146 +1,68 @@
-# DSCI 551 - Hybrid Database System
+# DSCI 551 - Project Structure
 
-## Project Overview
-This project involves designing and implementing a hybrid database system that integrates both SQL and NoSQL data models. The system will handle YouTube analytics data using a relational database and Air Traffic Landing statistics at San Francisco International Airport (SFO) using a NoSQL database.
+## Folder Organization
+The project is divided into two main components:
+- **`mysql/`** - Contains all SQL-related functionality.
+- **`nosql/`** - Contains all NoSQL-related functionality.
 
-## System Design
-### 1. Relational Model (SQL)
-**Dataset:** [YouTube Global Statistics 2023](https://www.kaggle.com/datasets/nelgiriyewithana/global-youtube-statistics-2023)
+Each folder includes a `main.py` file along with supporting functional modules for CRUD operations, aggregation, joins, selection, filtering, and more.
 
-- **Entities:**
-  - Creator
-  - Video Statistics
-  - Country Details
-  - Subscribers
-  - Monetary Statistics
-- **Implementation Details:**
-  - Data is extracted, filtered, and normalized into relational tables.
-  - A Python-based custom key-value store enables efficient joins and projections.
-  - UUIDs ensure uniqueness and prevent hash conflicts.
-
-### 2. Non-Relational Model (NoSQL)
-**Dataset:** [SFO Air Traffic Landing Statistics](https://www.kaggle.com/datasets/lostinworlds/sf-air-traffic-landing-statistics)
-
-- **Collections:**
-  - Airlines
-  - AirportRegions
-  - AircraftDetails
-- **Implementation Details:**
-  - Data is stored in JSON format, simulating NoSQL collections.
-  - Schema is adjustable on the fly for flexibility.
-
-## Query Language
-The system includes a custom query language supporting:
-
-### **NoSQL Commands**
-#### **CREATE TABLE COMMAND**
-```sql
-CREATE TABLE ZZ
+## Execution
+To run commands, navigate to the respective folder and execute:
+```bash
+python3 main.py
 ```
+This will launch a command-line interface where users can enter commands. Use `exit` to close the session.
 
-#### **INSERT INTO TABLE COMMAND**
+## SQL Operations
+### **Table Creation**
 ```sql
-INSERT INTO ZZ ({"id":"1"})
-INSERT INTO ZZ ({"id":"1" , "value" : "Test"})
+CREATE TABLE newTable (id, name, val);
 ```
+- Creates CSV-based tables.
+- If the table does not exist, generates a new CSV file with the specified attributes.
 
-#### **UPDATE COMMAND**
+### **Data Manipulation**
 ```sql
-UPDATE INTO ZZ 9749f911-75bb-48a5-9475-61b107bcff26 ({"id" : "99" , "value": "updated"})
+INSERT INTO newTable (401, 'Jake Doe', 100000);
+UPDATE INTO newTable <uuid> (id 999, val 420);
+DELETE FROM newTable <uuid>;
 ```
+- Supports inserting, updating, and deleting records from CSV tables.
 
-#### **DELETE COMMAND**
+### **Query Operations**
 ```sql
-DELETE FROM ZZ 9749f911-75bb-48a5-9475-61b107bcff26
+SELECT Title, rank, Country FROM YoutubeChannels WHERE rank > 1 GROUP BY Country ORDER BY Country;
+FILTER [Youtuber, subscribers, rank] FROM YoutubeChannels WHERE rank >= 5;
+JOIN ['Youtuber'], ['video_views_rank', 'country_rank'] FROM YoutubeChannels.uuid = YoutubeViews.fk WHERE country_rank >= 5 ORDER BY Youtuber;
 ```
+- Includes filtering, projections, joins, aggregations, and ordering.
 
-#### **FILTER COMMAND**
-```sql
-filter all from youtube_data
-filter all from youtube_data where rank >= 5
-filter [channel_name,subscribers] from youtube_data
-filter [channel_name,subscribers] from youtube_data where rank >= 5
+## NoSQL Operations
+### **Table Creation**
+```nosql
+CREATE TABLE ZZ;
 ```
+- Creates JSON-based tables.
 
-#### **JOIN COMMAND**
-```sql
-Join ['name', 'age'], ['job', 'city'] FROM Table1.uuid = Table2.fk
-Join ['name', 'age'], ['job', 'city'] FROM Table1.uuid = Table2.fk Where age > 25
-Join ['name', 'age'], ['job', 'city'] FROM Table1.uuid = Table2.fk Where age > 25 order by city
+### **Data Manipulation**
+```nosql
+INSERT INTO ZZ ( {"id":"1", "value":"Test"} );
+UPDATE INTO ZZ <uuid> ( {"id":"99", "value":"updated"} );
+DELETE FROM ZZ <uuid>;
 ```
+- Supports inserting, updating, and deleting JSON records.
 
-#### **AGGREGATE COMMANDS**
-```sql
-AGGREGATE COUNT(channel_type) , Title, rank , category FROM YoutubeChannels GROUP BY Title
-AGGREGATE COUNT(channel_type) , Title, rank , category FROM YoutubeChannels
+### **Query Operations**
+```nosql
+FILTER [Activity_Period, Operating_Airline, GEO_Region] FROM airline WHERE GEO_Region = 'US';
+JOIN ['Activity_Period', 'GEO_Region'], ['Landing_Count'] FROM airline.uuid = details.fk WHERE Landing_Count == 1020;
+SELECT Activity_Period, GEO_Summary, GEO_Region FROM airline WHERE GEO_Region == 'Caribbean' ORDER BY Activity_Period;
 ```
+- Includes filtering, selections, joins, and aggregations.
 
-#### **GROUP, CONDITION AND ORDER BY**
-```sql
-SELECT Title, rank , Country FROM YoutubeChannels WHERE rank == '9'
-SELECT Title, rank , Country FROM YoutubeChannels ORDER BY Country
-SELECT Title, rank , Country FROM YoutubeChannels WHERE rank > '1' GROUP BY Country ORDER BY Country
-```
-
-### **SQL Commands**
-#### **CREATE TABLE**
-```sql
-CREATE TABLE newTable (id, name, val)
-```
-
-#### **INSERT INTO TABLE**
-```sql
-INSERT INTO newTable (100, John Doe, 1000)
-INSERT INTO newTable (101, Jake Doe, 2000)
-INSERT INTO newTable (201, Sal Doe, 2000)
-INSERT INTO newTable (301, Sal Doe , 3000)
-```
-
-#### **UPDATE TABLE**
-```sql
-UPDATE INTO newTable 9431fa9d-9cbf-4284-9496-e0e99657e32f ( id 999 , val 420)
-```
-
-#### **DELETE FROM TABLE**
-```sql
-DELETE FROM newTable efca5fe7-a9b4-4bc7-a1d9-46af45ac3f5e
-```
-
-#### **FILTER COMMANDS**
-```sql
-Filter [ Youtuber,subscribers] from YoutubeChannel where rank >= 5
-```
-
-#### **PROJECTION COMMANDS**
-```sql
-Proj [uuid, rank, Youtuber ] FROM YoutubeChannels
-```
-
-#### **JOIN COMMANDS**
-```sql
-Join ['Youtuber'], ['video_views_rank','country_rank'] FROM YoutubeChannels.uuid = YoutubeViews.fk WHERE country_rank >= 5 ORDER BY Youtuber
-```
-
-**Note:** The last join query is showing incorrect output, further debugging may be required.
-
-## Team Members
-### **Karan Manishkumar Shah**
-- **Role:** NoSQL Database Specialist
-- **Skills:** NoSQL systems, data modeling, data integration
-- **Responsibilities:**
-  - Implement NoSQL database structure
-  - Define schema and queries
-  - Ensure data consistency and scalability
-
-### **Aniket Kumar**
-- **Role:** SQL Database Specialist
-- **Skills:** SQL, relational schema design, query optimization
-- **Responsibilities:**
-  - Implement relational database schema
-  - Optimize SQL queries
-  - Develop stored procedures
-
-
+## Summary
+This project provides a unified query interface for both **SQL and NoSQL** databases, enabling seamless interactions through a structured command-line interface. It efficiently processes **CSV-based relational data** and **JSON-based document data** while supporting **complex queries, joins, and aggregations**.
 
 ## License
 This project is open-source and available under the [MIT License](LICENSE).
